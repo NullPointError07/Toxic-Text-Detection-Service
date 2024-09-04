@@ -6,7 +6,7 @@ import {
   TtdResponseOk,
 } from "./ttdProcessorResponseOk";
 
-interface TtdQueueCompleted extends SharedFields {
+export interface TtdQueueCompleted extends SharedFields {
   ttd_processor_api_response: TtdResponseOk;
   publish_status: OnCompleteStatus;
 }
