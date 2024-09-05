@@ -13,7 +13,7 @@ export async function processQueue() {
     console.log(
       `+------------------ QUEUE PROCESSOR STARTED AT ${new Date()} ----------------------+`
     );
-    console.log("| Fetching oldest item in gd-queue");
+    // console.log("| Fetching oldest item in gd-queue");
     const oldestDocuemnt = await TtdQueueModel.findOne().exec();
 
     if (!oldestDocuemnt) {
@@ -21,8 +21,8 @@ export async function processQueue() {
       return "Cannot find any document, Collection Is Empty";
     }
 
-    console.log("| Oldest item has been fetched from gd-queue");
-    console.log("oldes doc", oldestDocuemnt);
+    // console.log("| Oldest item has been fetched from gd-queue");
+    // console.log("oldes doc", oldestDocuemnt);
 
     const { _id, title, description } = oldestDocuemnt;
 
@@ -32,8 +32,8 @@ export async function processQueue() {
 
     let response;
 
-    console.log("| Invoking ttd-micro-service-toxic-text-processor API");
-    console.log(`| => API URL: ${ToxicTextDetectionApi}`);
+    // console.log("| Invoking ttd-micro-service-toxic-text-processor API");
+    // console.log(`| => API URL: ${ToxicTextDetectionApi}`);
 
     try {
       response = await axios.post(ToxicTextDetectionApi, {
@@ -65,10 +65,10 @@ export async function processQueue() {
       }
     }
 
-    console.log(
-      "| ttd-micro-service-toxic-text-processor sent output",
-      response?.data
-    );
+    // console.log(
+    //   "| ttd-micro-service-toxic-text-processor sent output",
+    //   response?.data
+    // );
 
     switch (response?.data.status) {
       case 0:

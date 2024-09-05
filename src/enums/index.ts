@@ -23,9 +23,9 @@ export enum ErrorTypes {
   ERROR = "error",
 }
 
-export enum VulgarOrNonVulger {
+export enum VulgarOrNonVulgar {
   VULGAR = "vulger",
-  NON_VULGER = "non_vulger",
+  NON_VULGAR = "non-vulgar",
 }
 
 export enum Languages {

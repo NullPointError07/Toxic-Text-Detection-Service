@@ -4,7 +4,7 @@ import { processQueue } from "../processQueue";
 let isProcessorBusy = false;
 // define ttd-prcessor-job
 export const processorJob = CronJob.from({
-  cronTime: "*/5 * * * *",
+  cronTime: "*/30 * * * * *",
   onTick: async function () {
     console.log("+---------------- PROCESSOR-JOB AWAKE ---------------+");
     if (!isProcessorBusy) {
