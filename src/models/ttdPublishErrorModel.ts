@@ -4,5 +4,5 @@ import { TtdPublished, TtdPublishedSchema } from "./ttdPublishedModel";
 export const TtdPublishErrorModel = mongoose.model<TtdPublished>(
   "ttd_publish_error",
   TtdPublishedSchema,
-  "ttdd_publish_error"
+  "ttd_publish_error"
 );

@@ -8,6 +8,7 @@ interface TtdQueueErrorTypes extends SharedFields {
 const TtdQueueErrorTypesSchema: Schema = new Schema(
   {
     ...SharedFieldsSchema.obj,
+    item_id: { type: Schema.Types.ObjectId, required: true },
     video_processor_api_response: {
       type: Schema.Types.Mixed,
       required: true,

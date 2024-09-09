@@ -14,6 +14,7 @@ export interface TtdQueueCompleted extends SharedFields {
 const TtdQueueCompletedSchema: Schema = new Schema(
   {
     ...SharedFieldsSchema.obj,
+    item_id: { type: Schema.Types.ObjectId, required: true },
     ttd_processor_api_response: {
       type: TtdProcessorResponseOk,
       required: true,

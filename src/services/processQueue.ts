@@ -13,15 +13,17 @@ export async function processQueue() {
     console.log(
       `+------------------ QUEUE PROCESSOR STARTED AT ${new Date()} ----------------------+`
     );
-    // console.log("| Fetching oldest item in gd-queue");
-    const oldestDocuemnt = await TtdQueueModel.findOne().exec();
+    // console.log("| Fetching oldest item in ttd-queue");
+    const oldestDocuemnt = await TtdQueueModel.findOne({
+      q_status: "pending",
+    }).exec();
 
     if (!oldestDocuemnt) {
       console.log("+--------- ttd-queue empty, terminating process ---------+");
       return "Cannot find any document, Collection Is Empty";
     }
 
-    // console.log("| Oldest item has been fetched from gd-queue");
+    // console.log("| Oldest item has been fetched from ttd-queue");
     // console.log("oldes doc", oldestDocuemnt);
 
     const { _id, title, description } = oldestDocuemnt;

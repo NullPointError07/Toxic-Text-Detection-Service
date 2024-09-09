@@ -1,10 +1,10 @@
 import { Schema } from "mongoose";
-import { Languages, VulgarOrNonVulgar } from "../enums";
+import { Languages, Message } from "../enums";
 
 interface TextResponse {
   input: string;
   vulgar_words: string;
-  msg: VulgarOrNonVulgar;
+  msg: Message;
   vulgar_percentage: number;
   language: Languages;
 }
@@ -22,7 +22,7 @@ const TextResponseSchema = new Schema(
     msg: {
       type: String,
       required: false,
-      enum: Object.values(VulgarOrNonVulgar),
+      enum: Object.values(Message),
     },
     vulgar_percentage: { type: Number, required: false },
     language: { type: String, required: false, enum: Object.values(Languages) },

@@ -24,7 +24,7 @@ export async function onTtdPublishComplete(
     await TtdPublishedModel.create(documentData);
 
     await deleteFromTtdCompleted(_id);
-    console.log(`| Item has been moved from gd-completed to gd-published`);
+    console.log(`| Item has been moved from ttd-completed to ttd-published`);
   } catch (error) {
     console.log(
       `| Failed to move item from ttd-completed to ttd-published`,
