@@ -7,6 +7,7 @@ import { TtdQueueModel } from "../models/ttdQueueModel";
  */
 
 export async function updateQueue(req: Request, res: Response) {
+  console.log("+------------ NEW UPDATE QUEUE COMING THROUGH ---------+");
   console.log("| Payload data: ", req.body);
 
   const { item_id, item_type, title, description } = req.body;
@@ -24,9 +25,7 @@ export async function updateQueue(req: Request, res: Response) {
 
     if (updatedQueueItem) {
       console.log("| Queue item updated successfully");
-      res
-        .status(200)
-        .json({ status: 1, message: "Queue item updated successfully" });
+      res.status(200).json({ status: 1, message: "Queue item updated successfully" });
     }
 
     console.log("+-------------- END -----------+");
