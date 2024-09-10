@@ -3,14 +3,14 @@ import { publisherJob } from "../services/cronJobs/publisherJob";
 
 const router = express.Router();
 
-router.post("/start", async (req, res) => {
+router.get("/start", async (req, res) => {
   console.log("starting ttd-processor");
   publisherJob.start();
   console.log("ttd-processor started");
   res.status(200).json({ message: "ttd-processor started successfully" });
 });
 
-router.post("/stop", async (req, res) => {
+router.get("/stop", async (req, res) => {
   console.log("stopping ttd-processor");
   publisherJob.stop();
   console.log("ttd-processor stopped");
