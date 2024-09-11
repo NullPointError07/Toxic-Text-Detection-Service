@@ -17,7 +17,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to Toxic Text Detection Service");
 });
 
-app.use("/ttd-setQueue", TtdSetQueueRouter);
+app.use("/ttd-set-queue", TtdSetQueueRouter);
 app.use("/ttd-post-queue", TtdPostQueueRouter);
 app.use("/ttd-update-queue", TtdUpdateQueueRouter);
 app.use("/ttd-processor", TtdProcessor);

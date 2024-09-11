@@ -7,7 +7,7 @@ import { TtdQueueModel } from "../models/ttdQueueModel";
  */
 
 export async function postQueue(req: Request, res: Response) {
-  console.log("+------------ NEW POST QUEUE COMING THROUGH ---------+");
+  console.log("| Queue Item Type: NEW POST");
   console.log("| Payload data: ", req.body);
   const { item_type } = req.body;
 
