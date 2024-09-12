@@ -11,17 +11,13 @@ export const processorJob = CronJob.from({
       console.log("| Processor is free, take action");
       isProcessorBusy = true;
       try {
-        console.log(
-          "| About to start processing, processor is flagged as busy\n\n"
-        );
+        console.log("| About to start processing, processor is flagged as busy\n\n");
         await processQueue();
       } catch (error) {
         console.log("| An error occurred while processing");
       } finally {
         isProcessorBusy = false;
-        console.log(
-          "| Processing completed, processor is flagged as free, waiting for next tick...."
-        );
+        console.log("| Processing completed, processor is flagged as free, waiting for next tick....");
       }
     } else {
       console.log("| Processor is busy, skipping this tick");

@@ -1,16 +1,17 @@
 import mongoose, { Schema } from "mongoose";
 import { SharedFields, SharedFieldsSchema } from "./sharedFields";
+import { TtdProcessorFailSchema, TtdResponseFail } from "./ttdProcessorResponseFail";
 
 interface TtdQueueErrorTypes extends SharedFields {
-  ttd_processor_api_response: Record<string, any>;
+  ttd_processor_api_response: TtdResponseFail;
 }
 
 const TtdQueueErrorTypesSchema: Schema = new Schema(
   {
     ...SharedFieldsSchema.obj,
     item_id: { type: Schema.Types.ObjectId, required: true },
-    video_processor_api_response: {
-      type: Schema.Types.Mixed,
+    ttd_processor_api_response: {
+      type: TtdProcessorFailSchema,
       required: true,
     },
   },

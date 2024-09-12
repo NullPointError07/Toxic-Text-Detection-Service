@@ -10,9 +10,7 @@ import { onQueueComplete } from "./onQueueComplete";
  */
 export async function processQueue() {
   try {
-    console.log(
-      `+------------------ QUEUE PROCESSOR STARTED AT ${new Date()} ----------------------+`
-    );
+    console.log(`+------------------ QUEUE PROCESSOR STARTED AT ${new Date()} ----------------------+`);
     // console.log("| Fetching oldest item in ttd-queue");
     const oldestDocuemnt = await TtdQueueModel.findOne({
       q_status: "pending",
@@ -42,6 +40,7 @@ export async function processQueue() {
         title,
         description,
       });
+      console.log("response from ttd model", response);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         console.log("| What is the type of Axios Error", error.code);
@@ -63,6 +62,13 @@ export async function processQueue() {
           };
         }
       } else {
+        response = {
+          data: {
+            status: 0,
+            error_type: "error",
+            detail: "An unexpected axios error occured",
+          },
+        };
         console.log("| An unexpected axios error occured");
       }
     }

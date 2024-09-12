@@ -7,12 +7,15 @@ export interface TtdResponseFail {
   detail: string;
 }
 
-export const TtdProcessorFailSchema: Schema = new Schema({
-  status: { type: Number, required: true, enum: [0] },
-  error_type: {
-    type: String,
-    enum: Object.values(ErrorTypes),
-    required: true,
+export const TtdProcessorFailSchema: Schema = new Schema(
+  {
+    status: { type: Number, required: true, enum: [0] },
+    error_type: {
+      type: String,
+      enum: Object.values(ErrorTypes),
+      required: true,
+    },
+    detail: { type: String, required: true },
   },
-  detail: { type: String, required: true },
-});
+  { _id: false }
+);
