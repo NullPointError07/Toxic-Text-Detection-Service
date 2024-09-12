@@ -6,7 +6,6 @@ import {
   TtdQueueTimeOutModel,
 } from "../models/ttdQueueErrorTypesModel";
 import { TtdQueue } from "../models/ttdQueueModel";
-import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 
 export async function onQueueError(oldestDocuemnt: TtdQueue, apiResponse: TtdResponseFail) {
   const { _id, q_status, ...rest } = oldestDocuemnt.toObject();
@@ -40,8 +39,6 @@ export async function onQueueError(oldestDocuemnt: TtdQueue, apiResponse: TtdRes
       default:
         console.log("| Unknown error type:", error_type);
     }
-
-    await deleteFromTtdQueue(_id);
   } catch (error) {
     console.log("| Failure to move queue-item from ttd_queue to ttd_timeout", error);
   }

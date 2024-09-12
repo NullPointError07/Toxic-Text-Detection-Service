@@ -1,6 +1,5 @@
 import { OnCompleteStatus } from "../enums";
 import { TtdQueue } from "../models/ttdQueueModel";
-import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 import { TtdResponseOk } from "../models/ttdProcessorResponseOk";
 import { TtdQueueCompletedModel } from "../models/ttdQueueCompletedModel";
 
@@ -21,8 +20,6 @@ export async function onQueueComplete(oldestDocuemnt: TtdQueue, apiResponse: Ttd
 
   try {
     await TtdQueueCompletedModel.create(completedData);
-
-    await deleteFromTtdQueue(_id);
   } catch (error) {
     console.log("| Failure to move Queue: From Queue to Invalid Video", error);
     console.log("+------- END -------+");

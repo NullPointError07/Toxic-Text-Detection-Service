@@ -4,6 +4,7 @@ import { ToxicTextDetectionApi } from "../utils/apuUrls";
 import { updateQueueStatus } from "../utils/updateQueueStatus";
 import { onQueueError } from "./onQueueError";
 import { onQueueComplete } from "./onQueueComplete";
+import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 
 /**
  * @description: "This function will process the video send request in ai model and save the response according response status"
