@@ -4,11 +4,8 @@ import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 import { TtdResponseOk } from "../models/ttdProcessorResponseOk";
 import { TtdQueueCompletedModel } from "../models/ttdQueueCompletedModel";
 
-export async function onQueueComplete(
-  oldestDocuemnt: TtdQueue,
-  apiResponse: TtdResponseOk
-) {
-  console.log("api response from model....", apiResponse);
+export async function onQueueComplete(oldestDocuemnt: TtdQueue, apiResponse: TtdResponseOk) {
+  //console.log("api response from model....", apiResponse);
 
   const { _id, q_status, ...rest } = oldestDocuemnt.toObject();
 
@@ -20,7 +17,7 @@ export async function onQueueComplete(
     publish_status: OnCompleteStatus.UNPUBLISHED,
   };
 
-  console.log("completed Data", completedData);
+  console.log("| Completed data: ", completedData);
 
   try {
     await TtdQueueCompletedModel.create(completedData);

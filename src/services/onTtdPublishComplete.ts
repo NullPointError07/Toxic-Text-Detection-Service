@@ -16,7 +16,7 @@ export async function onTtdPublishComplete(
     ttd_publisher_api_response: apiResponse,
   };
 
-  console.log(`| Published ttd-results, item-id:${documentData.item_id}`);
+  console.log(`| Published ttd-results, item-id: ${documentData.item_id}`);
 
   try {
     await TtdPublishedModel.create(documentData);

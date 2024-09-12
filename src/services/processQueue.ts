@@ -10,19 +10,19 @@ import { onQueueComplete } from "./onQueueComplete";
  */
 export async function processQueue() {
   try {
-    console.log(`+------------------ QUEUE PROCESSOR STARTED AT ${new Date()} ----------------------+`);
-    // console.log("| Fetching oldest item in ttd-queue");
+    console.log(`| Queue processor started at: ${new Date()}`);
+    console.log("| Fetching oldest item in ttd-queue");
     const oldestDocuemnt = await TtdQueueModel.findOne({
       q_status: "pending",
     }).exec();
 
     if (!oldestDocuemnt) {
-      console.log("+--------- ttd-queue empty, terminating process ---------+");
+      console.log("| ttd-queue empty, terminating process");
       return "Cannot find any document, Collection Is Empty";
     }
 
-    // console.log("| Oldest item has been fetched from ttd-queue");
-    // console.log("oldes doc", oldestDocuemnt);
+    console.log("| Oldest item has been fetched from ttd-queue");
+    console.log("oldes doc", oldestDocuemnt);
 
     const { _id, title, description } = oldestDocuemnt;
 
@@ -32,18 +32,18 @@ export async function processQueue() {
 
     let response;
 
-    // console.log("| Invoking ttd-micro-service-toxic-text-processor API");
-    // console.log(`| => API URL: ${ToxicTextDetectionApi}`);
+    console.log("| Invoking ttd-micro-service-toxic-text-processor API");
+    console.log(`| API URL: ${ToxicTextDetectionApi}`);
 
     try {
       response = await axios.post(ToxicTextDetectionApi, {
         title,
         description,
       });
-      console.log("response from ttd model", response);
+      //console.log("| Response from ttd model", response);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.log("| What is the type of Axios Error", error.code);
+        console.log("| Error occured while processing, error type: ", error.code);
         if (error.code === "ECONNABORTED") {
           response = {
             data: {
@@ -73,10 +73,7 @@ export async function processQueue() {
       }
     }
 
-    // console.log(
-    //   "| ttd-micro-service-toxic-text-processor sent output",
-    //   response?.data
-    // );
+    console.log("| ttd-micro-service-toxic-text-processor sent output", response?.data);
 
     switch (response?.data.status) {
       case 0:
@@ -89,9 +86,8 @@ export async function processQueue() {
         console.error("Unknown status type:", response?.data.status);
     }
 
-    console.log("+-------------- Processing Complete -----------+\n\n\n\n");
+    console.log("| Processing Complete");
   } catch (error) {
     console.log("| An Error Occured At Process Queue", error);
-    console.log("+------- END -------+");
   }
 }

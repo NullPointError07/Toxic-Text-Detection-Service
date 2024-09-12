@@ -1,6 +1,10 @@
 import { ErrorTypes } from "../enums";
 import { TtdResponseFail } from "../models/ttdProcessorResponseFail";
-import { TtdQueueErrorModel, TtdQueueInvalidModel, TtdQueueTimeOutModel } from "../models/ttdQueueErrorTypesModel";
+import {
+  TtdQueueErrorModel,
+  TtdQueueInvalidModel,
+  TtdQueueTimeOutModel,
+} from "../models/ttdQueueErrorTypesModel";
 import { TtdQueue } from "../models/ttdQueueModel";
 import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 
@@ -13,22 +17,23 @@ export async function onQueueError(oldestDocuemnt: TtdQueue, apiResponse: TtdRes
   };
 
   const { error_type } = apiResponse;
-  console.log(`| Text processing error, type:${error_type}`);
-  console.log(`| Text processing error data : ${documentData}`);
+  console.log(`| Text processing error, type: ${error_type}`);
+  console.log(`| Text processing error, data:`);
+  console.log(documentData);
   try {
     switch (error_type) {
       case ErrorTypes.TIMEOUT:
-        console.log("timeout:", documentData);
+        //console.log("timeout:", documentData);
         await TtdQueueTimeOutModel.create(documentData);
         console.log("| item has been moved to 'timeout' collection");
         break;
       case ErrorTypes.INVALID:
-        console.log("invalid....", documentData);
+        //console.log("invalid....", documentData);
         await TtdQueueInvalidModel.create(documentData);
         console.log("| item has been moved to 'invalid' collection");
         break;
       case ErrorTypes.ERROR:
-        console.log("error....", documentData);
+        //console.log("error....", documentData);
         await TtdQueueErrorModel.create(documentData);
         console.log("| item has been moved to 'error' collection");
         break;
@@ -38,7 +43,6 @@ export async function onQueueError(oldestDocuemnt: TtdQueue, apiResponse: TtdRes
 
     await deleteFromTtdQueue(_id);
   } catch (error) {
-    console.log("| Failure to move Queue: From Queue to Timeout", error);
-    console.log("+------- END -------+");
+    console.log("| Failure to move queue-item from ttd_queue to ttd_timeout", error);
   }
 }

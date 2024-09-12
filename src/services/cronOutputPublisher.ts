@@ -36,7 +36,7 @@ export async function cronOutputPublisher() {
     await updatePublishStatus(_id);
     console.log("| Updated publish_status to in_progress, publisher is busy now");
 
-    console.log("| Gender Publication API: ", ToxicTextPublicationApi);
+    console.log("| Publication API: ", ToxicTextPublicationApi);
     console.log("| Invoking publication API with: ", publicationData);
 
     let response;
