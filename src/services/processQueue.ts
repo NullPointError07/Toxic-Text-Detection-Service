@@ -4,6 +4,7 @@ import { ToxicTextDetectionApi } from "../utils/apuUrls";
 import { updateQueueStatus } from "../utils/updateQueueStatus";
 import { onQueueError } from "./onQueueError";
 import { onQueueComplete } from "./onQueueComplete";
+import { deleteFromTtdQueue } from "../utils/deleteFromQueue";
 
 /**
  * @description: "This function will process the video send request in ai model and save the response according response status"
@@ -89,6 +90,7 @@ export async function processQueue() {
         console.error("Unknown status type:", response?.data.status);
     }
 
+    await deleteFromTtdQueue(_id);
     console.log("+-------------- Processing Complete -----------+\n\n\n\n");
   } catch (error) {
     console.log("| An Error Occured At Process Queue", error);

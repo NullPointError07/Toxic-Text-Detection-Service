@@ -8,7 +8,7 @@ import { ToxicTextPublicationApi } from "../utils/apuUrls";
 import { deleteFromTtdCompleted } from "../utils/deleteFromTtdCompleted";
 
 /**
- * @description: "This Function will publish a video to fanfare backend from Gd Service(GdCompleted)"
+ * @description: "This Function will publish a video to fanfare backend from Ttd Service(TtdCompleted)"
  */
 export async function cronOutputPublisher() {
   console.log(`+------------------ TTD PUBLISHER STARTED AT ${new Date()} ------------------+`);
@@ -36,7 +36,7 @@ export async function cronOutputPublisher() {
     await updatePublishStatus(_id);
     console.log("| Updated publish_status to in_progress, publisher is busy now");
 
-    console.log("| Gender Publication API: ", ToxicTextPublicationApi);
+    console.log("| Toxic Text Publication API: ", ToxicTextPublicationApi);
     console.log("| Invoking publication API with: ", publicationData);
 
     let response;

@@ -20,7 +20,7 @@ export async function onTtdPublishError(
     await TtdPublishErrorModel.create(documentData);
   } catch (error) {
     console.log(
-      "| Failure to move from Gd Completed: From Gd Completed to GdPublishTimeout/GdPublishError",
+      "| Failure to move from Ttd Completed: From Ttd Completed to TtdPublishTimeout/TtdPublishError",
       error
     );
     console.log("+------- END -------+");
